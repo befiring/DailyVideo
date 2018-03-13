@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import cn.com.ut.uttydt.common.UTTYDTApplication;
 
 /**
  * Created by Wang Meng on 2017/8/7.
@@ -22,7 +21,7 @@ public class NetUtil {
      * 判断是否已连接网络
      */
     public static boolean isNetworkAvilable(){
-        ConnectivityManager connectivityManager = (ConnectivityManager) MyUtils.application.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) MyUtils.CONTEXT.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetInfo = null;
         if (connectivityManager != null) {
             activeNetInfo = connectivityManager.getActiveNetworkInfo();
@@ -33,7 +32,7 @@ public class NetUtil {
      * 判断当前网络是否是wifi
      */
     public static boolean isWifi() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) MyUtils.application.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) MyUtils.CONTEXT.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetInfo = null;
         if (connectivityManager != null) {
             activeNetInfo = connectivityManager.getActiveNetworkInfo();
@@ -45,7 +44,7 @@ public class NetUtil {
      * 判断当前网络是否是移动数据连接
      */
     public static boolean isMobile() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) MyUtils.application.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) MyUtils.CONTEXT.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetInfo = null;
         if (connectivityManager != null) {
             activeNetInfo = connectivityManager.getActiveNetworkInfo();

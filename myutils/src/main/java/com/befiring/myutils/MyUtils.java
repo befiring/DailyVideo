@@ -1,6 +1,8 @@
 package com.befiring.myutils;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Context;
 
 /**
  * Created by wyman on 2018/3/6.
@@ -8,12 +10,19 @@ import android.app.Application;
 
 public class MyUtils {
 
-    protected static Application application;
-    public boolean isCrashHandlerEnabled;
+    @SuppressLint("StaticFieldLeak")
+    private static MyUtils instance;
 
-    public static MyUtils crashHandlerEnabled(boolean isCrashHandlerEnabled){
-        this.isCrashHandlerEnabled=isCrashHandlerEnabled;
-        return this;
+    @SuppressLint("StaticFieldLeak")
+    protected static Context CONTEXT;
+
+
+
+    public static void setUp(Application application) {
+        CONTEXT = application.getApplicationContext();
     }
+
+
+
 
 }

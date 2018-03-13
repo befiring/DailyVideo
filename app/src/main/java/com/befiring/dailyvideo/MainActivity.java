@@ -3,6 +3,8 @@ package com.befiring.dailyvideo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.befiring.myutils.LogUtil;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
