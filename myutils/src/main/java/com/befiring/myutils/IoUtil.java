@@ -1,12 +1,19 @@
 package com.befiring.myutils;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 
 /**
  * Created by Wang Meng on 2017/8/24.
@@ -67,6 +74,32 @@ public class IoUtil {
             writer.close();
         } catch (Exception e) {
             System.out.println("写文件内容操作出错");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 文件复制方法（高效率，非常适合大文件拷贝）
+     * @param source 源文件
+     * @param dest 目标文件
+     */
+    public static void copy(File source,File dest){
+        FileChannel inputChannel;
+        FileChannel outputChannel;
+        try {
+            inputChannel = new FileInputStream(source).getChannel();
+            outputChannel = new FileOutputStream(dest).getChannel();
+            outputChannel.transferFrom(inputChannel,0,inputChannel.size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    public static void copy2(File source, File dest){
+        try {
+            Files.copy(source.toPath(),dest.toPath());
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

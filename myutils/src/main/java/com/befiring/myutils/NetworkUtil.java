@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
  * Created by Wang Meng on 2017/8/7.
  */
 
-public class NetUtil {
+public class NetworkUtil {
 
     /**
      * 判断是否已连接网络

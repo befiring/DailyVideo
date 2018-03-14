@@ -1,28 +1,37 @@
 package com.befiring.myutils;
 
+
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.content.Context;
+import android.text.TextUtils;
 
 /**
  * Created by wyman on 2018/3/6.
  */
 
 public class MyUtils {
-
     @SuppressLint("StaticFieldLeak")
-    private static MyUtils instance;
+    static Context CONTEXT;
 
-    @SuppressLint("StaticFieldLeak")
-    protected static Context CONTEXT;
+    static String CRASH_LOG_PATH;
 
+    static boolean IDE_LOG_ENABLED;
 
+    static boolean FILE_LOG_ENABLED;
 
-    public static void setUp(Application application) {
-        CONTEXT = application.getApplicationContext();
+    private MyUtils() {
+
     }
 
+    public static void init(MyUtilsConfiguration configuration) {
+        CRASH_LOG_PATH = configuration.getCrashLogPath();
+        IDE_LOG_ENABLED = configuration.isIdeLogEnabled();
+        FILE_LOG_ENABLED = configuration.isFileLogEnabled();
+        CONTEXT = configuration.getContext();
 
-
+        if(!TextUtils.isEmpty(CRASH_LOG_PATH)){
+            CrashHandler.getInstance().init();
+        }
+    }
 
 }

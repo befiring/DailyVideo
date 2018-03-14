@@ -7,37 +7,35 @@ import android.content.Context;
  */
 
 public class MyUtilsConfiguration {
+    private Context context;
 
-    private static String CRASH_LOG_PATH;
+    private   String crashLogPath;
 
-    private static boolean IDE_LOG_ENABLED;
+    private  boolean ideLogEnabled;
 
-    private static boolean FILE_LOG_ENABLED;
+    private  boolean fileLogEnabled;
 
-
-    public static void setCrashLogPath(String path) {
-        CRASH_LOG_PATH = path;
-        CrashHandler.getInstance().init();
+    public Context getContext() {
+        return context;
     }
 
-    public static void setIdeLogEnabled(boolean ideLogEnabled) {
-        IDE_LOG_ENABLED = ideLogEnabled;
+    String getCrashLogPath() {
+        return crashLogPath;
     }
 
-    public static void setFileLogEnabled(boolean fileLogEnabled) {
-        FILE_LOG_ENABLED = fileLogEnabled;
+    boolean isIdeLogEnabled() {
+        return ideLogEnabled;
+    }
+
+    boolean isFileLogEnabled() {
+        return fileLogEnabled;
     }
 
     private MyUtilsConfiguration() {
     }
 
-    public void Build(Builder builder){
-        CRASH_LOG_PATH = builder.CRASH_LOG_PATH;
-        IDE_LOG_ENABLED = builder.IDE_LOG_ENABLED;
-        FILE_LOG_ENABLED = builder.FILE_LOG_ENABLED;
-    }
 
-    class Builder {
+    public static class Builder {
         private Context context;
 
         private  String CRASH_LOG_PATH;
@@ -64,5 +62,19 @@ public class MyUtilsConfiguration {
             this.FILE_LOG_ENABLED = enabled;
             return this;
         }
+
+        private void applyConfig(MyUtilsConfiguration configuration){
+            configuration.crashLogPath = CRASH_LOG_PATH;
+            configuration.ideLogEnabled = IDE_LOG_ENABLED;
+            configuration.fileLogEnabled = FILE_LOG_ENABLED;
+            configuration.context = context;
+        }
+
+        public MyUtilsConfiguration build(){
+            MyUtilsConfiguration configuration=new MyUtilsConfiguration();
+            applyConfig(configuration);
+            return configuration;
+        }
+
     }
 }
